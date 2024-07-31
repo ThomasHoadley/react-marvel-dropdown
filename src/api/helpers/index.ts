@@ -24,7 +24,6 @@ export async function marvelApiRequest(
     hash,
     ...(args && args),
   });
-  console.log("urlParams", urlParams);
 
   const url = `https://gateway.marvel.com:443/v1/public/${endpoint}?${
     urlParams && urlParams

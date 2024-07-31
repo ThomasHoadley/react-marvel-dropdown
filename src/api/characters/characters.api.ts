@@ -1,11 +1,9 @@
 import { marvelApiRequest } from "../helpers";
-import { CharacterArgs } from "./types";
+import { CharacterQueryArgs } from "./types";
 
-export async function getCharacters(args: CharacterArgs) {
-  const charactersRequest = await marvelApiRequest("characters", {
+export function getCharacters(args: CharacterQueryArgs) {
+  return marvelApiRequest("characters", {
     ...args,
-    orderBy: "name",
+    // orderBy: "name",
   });
-  const data = charactersRequest.json();
-  return data;
 }
