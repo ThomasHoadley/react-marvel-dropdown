@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CharacterFormatted } from "../../api/characters/types";
 import { P } from "../../components/atoms/typography";
-import SelectBox from "./components/character-select/select-box";
+import SelectBox from "./components/character-select-box/select-box";
 import CharacterList from "./components/chracter-list";
 import useGetCharacters from "./hooks/useGetCharacters";
 
@@ -14,9 +14,9 @@ function CharacterSearch() {
 
   /**
    * todo
+   * write tests
    * improve the error and loading state
    * improve UI UX experience - i.e. some on brand user loading states etc.
-   * write tests
    * consider scenario if user only enters 1 character
    */
   return (

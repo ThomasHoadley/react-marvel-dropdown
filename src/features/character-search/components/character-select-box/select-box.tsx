@@ -41,7 +41,7 @@ function SelectBox({
     if (!isCharacterSelected(characterList, character))
       setCharacterList((prevState) => [...prevState, character]);
   };
-  
+
   useEffect(() => {
     if (characters && characters.data.results.length > 0) {
       setDisplaySelectBox(true);
@@ -49,8 +49,9 @@ function SelectBox({
   }, [characters]);
 
   return (
-    <aside className="relative w-[400px] max-w-full mx-auto z-20">
+    <div className="relative w-[400px] max-w-full mx-auto z-20">
       <SearchInput
+        id="character-search-input"
         value={characterInput}
         onChange={(e) => setCharacterInput(e.target.value)}
         onFocus={() => {
@@ -72,7 +73,7 @@ function SelectBox({
           className="flex flex-col border rounded absolute top-0 mt-[42px] w-full bg-white max-h-[206px] overflow-auto"
           ref={selectBoxRef}
         >
-          {/* NOTE: I did not think this sort function qualified memoization as it is quick enough */}
+          {/* note: I did not think this sort function qualified memoization as it is quick enough */}
           {formattedCharacterData
             ?.sort(sortCharactersByName)
             .map((character) => {
@@ -86,6 +87,7 @@ function SelectBox({
                   }`}
                   // todo - handle enter key press
                   onClick={() => handleSelect(character)}
+                  key={character.id}
                 >
                   {character.name}
                 </button>
@@ -93,7 +95,7 @@ function SelectBox({
             })}
         </div>
       )}
-    </aside>
+    </div>
   );
 }
 

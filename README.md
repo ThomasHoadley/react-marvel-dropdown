@@ -48,3 +48,4 @@ Below is a list of my assumptions about the brief I made while working on this p
 
 - I have added a debounce to the search function for best UX
 - There have been very slow resposne times on the Marvel API, which has also been experienced by other people per this thread on reddit - https://www.reddit.com/r/MarvelUnlimited/comments/1eb5ey4/has_anyone_else_noticed_extremely_slow_response/
+- Use a string search for 'note' and 'todo' for some of my commentary.

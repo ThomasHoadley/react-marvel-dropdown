@@ -18,12 +18,10 @@ export type CharactersApiResponse = {
         description: string;
         modified: Date;
         resourceURI: string;
-        urls: [
-          {
-            type: string;
-            url: string;
-          }
-        ];
+        urls: {
+          type: string;
+          url: string;
+        }[];
         thumbnail: {
           path: string;
           extension: string;
@@ -32,24 +30,20 @@ export type CharactersApiResponse = {
           available: number;
           returned: number;
           collectionURI: string;
-          items: [
-            {
-              resourceURI: string;
-              name: string;
-            }
-          ];
+          items: {
+            resourceURI: string;
+            name: string;
+          }[];
         };
         stories: {
           available: number;
           returned: number;
           collectionURI: string;
-          items: [
-            {
-              resourceURI: string;
-              name: string;
-              type: string;
-            }
-          ];
+          items: {
+            resourceURI: string;
+            name: string;
+            type: string;
+          }[];
         };
         events: {
           available: number;
@@ -66,12 +60,10 @@ export type CharactersApiResponse = {
           available: number;
           returned: number;
           collectionURI: string;
-          items: [
-            {
-              resourceURI: string;
-              name: string;
-            }
-          ];
+          items: {
+            resourceURI: string;
+            name: string;
+          }[];
         };
       }
     ];

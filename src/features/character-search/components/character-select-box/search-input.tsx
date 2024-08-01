@@ -8,7 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   loading?: boolean;
 }
 
-// NOTE: I don't think this needs an icon to indicate closing it. Clicking away from it is intuitive for users.
+// note: I don't think this needs an icon to indicate closing it. Clicking away from it is intuitive for users.
 
 function SearchInput({
   value,
