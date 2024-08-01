@@ -89,7 +89,6 @@ export type CharacterQueryArgs = {
 export type CharacterFormatted = {
   id: number;
   name: string;
-  description: string;
   imageUrl: string;
 };
 

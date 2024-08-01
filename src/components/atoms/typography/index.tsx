@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cn } from "../../helpers";
+import { cn } from "../../../helpers";
 
 // used shadcn defaults - https://ui.shadcn.com/docs/components/typography
 

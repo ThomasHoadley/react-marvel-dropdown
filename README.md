@@ -43,3 +43,7 @@ Below is a list of my assumptions about the brief I made while working on this p
 - I assume that the tester will have a compatible version of Node. I considered adding `use-node-version=20.15.1` to .npmrc to set it at the latest LTS version but I didn't want to introduce possible build issues for the testing dev at this stage. Node version management could be discussed in future.
 
 - I would normally use pnpm for the build tool, but to reduce chance of errors for the tester, I have used npm.
+
+# Notes
+
+- I have added a debounce to the search function for best UX

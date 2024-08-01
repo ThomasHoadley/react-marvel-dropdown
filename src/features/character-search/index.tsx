@@ -7,7 +7,9 @@ import {
   CharactersApiResponse,
 } from "../../api/characters/types";
 import { P } from "../../components/atoms/typography";
-import SearchInput from "./components/search-input/SearchInput";
+import Card from "../../components/molecules/card";
+import SearchInput from "./components/search-input";
+import { isCharacterSelected, sortCharactersByName } from "./helpers";
 
 function CharacterSearch() {
   const [characterInput, setCharacterInput] = useState<string>("");
@@ -35,7 +37,7 @@ function CharacterSearch() {
     queryFn: async () => {
       const response = await getCharacters({
         nameStartsWith: debouncedSearchTerm,
-        limit: 5, // added artificial limit as Marvel API was very slow
+        limit: 10, // added artificial limit as Marvel API was very slow
       });
 
       return response.json();
@@ -43,12 +45,12 @@ function CharacterSearch() {
   });
 
   const formattedCharacterData = characters?.data.results.map((character) => {
-    return {
+    const data: CharacterFormatted = {
       id: character.id,
       name: character.name,
-      description: character.description,
-      imageUrl: character.thumbnail.path + character.thumbnail.extension,
-    } as CharacterFormatted;
+      imageUrl: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+    };
+    return data;
   });
 
   useEffect(() => {
@@ -57,25 +59,22 @@ function CharacterSearch() {
     }
   }, [characters]);
 
-  function handleSelect(options: CharacterFormatted) {
-    const alreadySelected = characterList.find(
-      (character) => character.id === options.id
-    );
-    if (!alreadySelected)
-      setCharacterList((prevState) => [...prevState, options]);
+  function handleSelect(character: CharacterFormatted) {
+    if (!isCharacterSelected(characterList, character))
+      setCharacterList((prevState) => [...prevState, character]);
   }
 
   /**
    * todo
-   * improve the error and loading state
    * add icon to close dropdown
-   * style the character list and add ability to remove
+   * improve the error and loading state
+   * add ability to remove card
    * refactor code to make more modular
-   * improve UI UX experience
+   * improve UI UX experience - i.e. some on brand user loading states etc.
    */
   return (
-    <div>
-      <div className="relative">
+    <div className="space-y-10">
+      <aside className="relative w-[400px] max-w-full mx-auto z-10">
         <SearchInput
           value={characterInput}
           onChange={(e) => setCharacterInput(e.target.value)}
@@ -90,33 +89,38 @@ function CharacterSearch() {
 
         {displaySelectBox && formattedCharacterData && (
           <div
-            className="flex flex-col border rounded absolute top-0 mt-[42px] w-full bg-white"
+            className="flex flex-col border rounded absolute top-0 mt-[42px] w-full bg-white max-h-[206px] overflow-auto"
             ref={selectBoxRef}
           >
-            {formattedCharacterData?.map((options) => {
-              return (
-                <button
-                  className="border-b py-2 px-2 cursor-pointer hover:bg-slate-100 text-left last:border-0"
-                  onClick={() => handleSelect(options)}
-                >
-                  {options.name}
-                </button>
-              );
-            })}
+            {/* NOTE: I did not think this sort function qualified memoization as it is quick enough */}
+            {formattedCharacterData
+              ?.sort(sortCharactersByName)
+              .map((character) => {
+                return (
+                  <button
+                    className={`border-b py-2 px-2 cursor-pointer hover:bg-slate-100 text-left last:border-0 ${
+                      isCharacterSelected(characterList, character)
+                        ? "bg-gray-100"
+                        : ""
+                    }`}
+                    // todo - handle enter press
+                    onClick={() => handleSelect(character)}
+                  >
+                    {character.name}
+                  </button>
+                );
+              })}
           </div>
         )}
+      </aside>
+      <div className="grid grid-cols-6 gap-4">
+        {characterList.map(({ imageUrl, name }) => {
+          return (
+            <Card imageUrl={imageUrl} title={name} className="col-span-2" />
+          );
+        })}
+        {isGetCharactersError && <P>There has been an error</P>}
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <P>You have chosen:</P>
-      {characterList.map((character) => {
-        return <P>{character.name}</P>;
-      })}
-      {isGetCharactersError && <P>There has been an error</P>}
     </div>
   );
 }

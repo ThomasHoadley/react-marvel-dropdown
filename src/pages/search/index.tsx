@@ -4,7 +4,7 @@ import CharacterSearch from "../../features/character-search";
 function SearchPage() {
   return (
     <>
-      <PageTitle text="Marvel Search" />
+      <PageTitle text="Character Search" />
       <CharacterSearch />
     </>
   );
