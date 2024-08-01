@@ -1,13 +1,20 @@
+import { Dispatch, SetStateAction } from "react";
 import { CharacterFormatted } from "../../../api/characters/types";
 import CharacterCard from "./character-card";
 
-function CharacterList({
-  characterList,
-  handleRemove,
-}: {
+interface Props {
   characterList: CharacterFormatted[];
-  handleRemove: (id: CharacterFormatted["id"]) => void;
-}) {
+  setCharacterList: Dispatch<SetStateAction<CharacterFormatted[]>>;
+}
+
+function CharacterList({ characterList, setCharacterList }: Props) {
+  const handleRemove = (characterId: CharacterFormatted["id"]) => {
+    const updatedCharacterList = characterList.filter(
+      (character) => character.id !== characterId
+    );
+    setCharacterList(updatedCharacterList);
+  };
+
   return (
     <div className="grid grid-cols-6 gap-4">
       {characterList.map(({ imageUrl, name, id }) => {

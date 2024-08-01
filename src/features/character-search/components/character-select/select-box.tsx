@@ -1,4 +1,5 @@
 import { useClickAway } from "@uidotdev/usehooks";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import {
   CharacterFormatted,
   CharactersApiResponse,
@@ -19,7 +20,7 @@ interface SelectBoxProps {
   characters?: CharactersApiResponse;
   isGetCharactersLoading: boolean;
   characterList: CharacterFormatted[];
-  handleSelect: (character: CharacterFormatted) => void;
+  setCharacterList: Dispatch<SetStateAction<CharacterFormatted[]>>;
 }
 
 function SelectBox({
@@ -30,12 +31,22 @@ function SelectBox({
   characters,
   isGetCharactersLoading,
   characterList,
-  handleSelect,
+  setCharacterList,
 }: SelectBoxProps) {
+  const formattedCharacterData = characters && formatCharacterData(characters);
   const selectBoxRef = useClickAway<HTMLDivElement>(() => {
     setDisplaySelectBox(false);
   });
-  const formattedCharacterData = characters && formatCharacterData(characters);
+  const handleSelect = (character: CharacterFormatted) => {
+    if (!isCharacterSelected(characterList, character))
+      setCharacterList((prevState) => [...prevState, character]);
+  };
+  
+  useEffect(() => {
+    if (characters && characters.data.results.length > 0) {
+      setDisplaySelectBox(true);
+    }
+  }, [characters]);
 
   return (
     <aside className="relative w-[400px] max-w-full mx-auto z-20">
