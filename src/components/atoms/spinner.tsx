@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from "react";
-import { cn } from "../../../helpers";
+import { cn } from "../../helpers";
 
 export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;

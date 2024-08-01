@@ -1,4 +1,4 @@
-import { H1 } from "../../atoms/typography";
+import { H1 } from "../atoms/typography";
 
 type Props = {
   text: string;

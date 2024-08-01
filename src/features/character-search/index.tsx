@@ -7,14 +7,15 @@ import {
   CharactersApiResponse,
 } from "../../api/characters/types";
 import { P } from "../../components/atoms/typography";
-import CharacterCard from "./components/character-card";
-import SearchInput from "./components/search-input";
+import CharacterList from "./components/chracter-list";
+import SearchInput from "./components/select-box/search-input";
 import { isCharacterSelected, sortCharactersByName } from "./helpers";
 
 function CharacterSearch() {
   const [characterInput, setCharacterInput] = useState<string>("");
-  const debouncedSearchTerm = useDebounce(characterInput, 400); // debounce the entry put to prevent unecessary API calls. could spend more time reviewing a different
   const [displaySelectBox, setDisplaySelectBox] = useState(false);
+  const debouncedSearchTerm = useDebounce(characterInput, 400); // debounce the entry put to prevent unecessary API calls. could spend more time reviewing a different
+
   const [characterList, setCharacterList] = useState<CharacterFormatted[]>([]);
   const selectBoxRef = useClickAway<HTMLDivElement>(() => {
     setDisplaySelectBox(false);
@@ -54,7 +55,7 @@ function CharacterSearch() {
   });
 
   useEffect(() => {
-    if (characters) {
+    if (characters && characters.data.results.length > 0) {
       setDisplaySelectBox(true);
     }
   }, [characters]);
@@ -72,13 +73,11 @@ function CharacterSearch() {
 
   /**
    * todo
-   * add icon to close dropdown
-   * improve the error and loading state
-   * handle empty results
-   * add ability to remove card
    * refactor code to make more modular
+   * improve the error and loading state
    * improve UI UX experience - i.e. some on brand user loading states etc.
    * write tests
+   * consider scenario if user only enters 1 character
    */
   return (
     <div className="space-y-10">
@@ -92,8 +91,13 @@ function CharacterSearch() {
             }
           }}
           loading={isGetCharactersLoading}
-          placeholder="Search characters..."
+          placeholder="Search for your heroes..."
         />
+        {characters && characters.data.results.length <= 0 && (
+          <P className="text-red-400 text-center !mt-2">
+            No results for search term
+          </P>
+        )}
 
         {displaySelectBox && formattedCharacterData && (
           <div
@@ -109,7 +113,7 @@ function CharacterSearch() {
                   <button
                     className={`border-b py-2 px-2 cursor-pointer hover:bg-slate-100 text-left last:border-0 ${
                       isCharacterSelected(characterList, character)
-                        ? "bg-gray-100"
+                        ? "bg-gray-100 !cursor-not-allowed"
                         : ""
                     }`}
                     // todo - handle enter key press
@@ -122,20 +126,12 @@ function CharacterSearch() {
           </div>
         )}
       </aside>
-      <div className="grid grid-cols-6 gap-4">
-        {characterList.map(({ imageUrl, name, id }) => {
-          return (
-            <CharacterCard
-              handleRemove={() => handleRemove(id)}
-              characterId={id}
-              imageUrl={imageUrl}
-              title={name}
-              className="col-span-6 sm:col-span-3 md:col-span-2"
-            />
-          );
-        })}
-        {isGetCharactersError && <P>There has been an error</P>}
-      </div>
+
+      <CharacterList
+        characterList={characterList}
+        handleRemove={handleRemove}
+      />
+      {isGetCharactersError && <P>There has been an error</P>}
     </div>
   );
 }

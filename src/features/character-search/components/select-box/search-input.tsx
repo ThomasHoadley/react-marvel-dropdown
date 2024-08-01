@@ -8,6 +8,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   loading?: boolean;
 }
 
+// NOTE: I don't think this needs an icon to indicate closing it. Clicking away from it is intuitive for users.
+
 function SearchInput({
   value,
   onChange,
@@ -24,7 +26,7 @@ function SearchInput({
         placeholder={placeholder}
         onFocus={onFocus}
       />
-      <div className="absolute top-1/2 -translate-y-1/2 right-4">
+      <div className="absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none">
         {!loading && <Search />}
         {loading && <Spinner />}
       </div>

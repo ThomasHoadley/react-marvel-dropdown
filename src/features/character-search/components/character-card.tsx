@@ -1,6 +1,6 @@
 import { CircleX } from "lucide-react";
-import { CharacterFormatted } from "../../../../api/characters/types";
-import Card, { CardProps } from "../../../../components/molecules/card";
+import { CharacterFormatted } from "../../../api/characters/types";
+import Card, { CardProps } from "../../../components/molecules/card";
 
 interface Props extends CardProps {
   characterId: CharacterFormatted["id"];

@@ -83,7 +83,7 @@ export type CharacterQueryArgs = {
   // name: string;
   nameStartsWith: string;
   orderBy?: string;
-  limit: number;
+  limit?: number;
 };
 
 export type CharacterFormatted = {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Pages } from "../../../pages/types";
-import { PageContainer } from "../../atoms/container";
-import { P } from "../../atoms/typography";
+import { Pages } from "../../pages/types";
+import { PageContainer } from "../atoms/container";
+import { P } from "../atoms/typography";
 
 function Header() {
   return (
@@ -10,7 +10,7 @@ function Header() {
         <div className="flex flex-row justify-center items-center space-x-2">
           <Link to={Pages.HOME}>
             <P className="font-bold text-2xl md:text-3xl text-red-600">
-              Marvel Characters
+              Super Hero Selection
             </P>
           </Link>
         </div>

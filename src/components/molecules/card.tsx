@@ -1,11 +1,10 @@
 import { HTMLAttributes } from "react";
-import { P } from "../../atoms/typography";
+import { P } from "../atoms/typography";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   subTitle?: string;
   imageUrl: string;
-
 }
 
 function Card({ imageUrl, title, className, ...rest }: CardProps) {
