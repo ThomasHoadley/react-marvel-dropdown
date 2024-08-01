@@ -9,7 +9,9 @@ function Header() {
       <PageContainer className="flex justify-between">
         <div className="flex flex-row justify-center items-center space-x-2">
           <Link to={Pages.HOME}>
-            <P className="font-bold text-2xl md:text-3xl">Marvel Characters</P>
+            <P className="font-bold text-2xl md:text-3xl text-red-600">
+              Marvel Characters
+            </P>
           </Link>
         </div>
         <nav className="flex flex-row space-x-4 items-center">

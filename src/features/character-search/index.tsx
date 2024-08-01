@@ -7,7 +7,7 @@ import {
   CharactersApiResponse,
 } from "../../api/characters/types";
 import { P } from "../../components/atoms/typography";
-import Card from "../../components/molecules/card";
+import CharacterCard from "./components/character-card";
 import SearchInput from "./components/search-input";
 import { isCharacterSelected, sortCharactersByName } from "./helpers";
 
@@ -59,22 +59,30 @@ function CharacterSearch() {
     }
   }, [characters]);
 
-  function handleSelect(character: CharacterFormatted) {
+  const handleSelect = (character: CharacterFormatted) => {
     if (!isCharacterSelected(characterList, character))
       setCharacterList((prevState) => [...prevState, character]);
-  }
+  };
+  const handleRemove = (characterId: CharacterFormatted["id"]) => {
+    const updatedCharacterList = characterList.filter(
+      (character) => character.id !== characterId
+    );
+    setCharacterList(updatedCharacterList);
+  };
 
   /**
    * todo
    * add icon to close dropdown
    * improve the error and loading state
+   * handle empty results
    * add ability to remove card
    * refactor code to make more modular
    * improve UI UX experience - i.e. some on brand user loading states etc.
+   * write tests
    */
   return (
     <div className="space-y-10">
-      <aside className="relative w-[400px] max-w-full mx-auto z-10">
+      <aside className="relative w-[400px] max-w-full mx-auto z-20">
         <SearchInput
           value={characterInput}
           onChange={(e) => setCharacterInput(e.target.value)}
@@ -96,6 +104,7 @@ function CharacterSearch() {
             {formattedCharacterData
               ?.sort(sortCharactersByName)
               .map((character) => {
+                // todo make the button component reusable
                 return (
                   <button
                     className={`border-b py-2 px-2 cursor-pointer hover:bg-slate-100 text-left last:border-0 ${
@@ -103,7 +112,7 @@ function CharacterSearch() {
                         ? "bg-gray-100"
                         : ""
                     }`}
-                    // todo - handle enter press
+                    // todo - handle enter key press
                     onClick={() => handleSelect(character)}
                   >
                     {character.name}
@@ -114,9 +123,15 @@ function CharacterSearch() {
         )}
       </aside>
       <div className="grid grid-cols-6 gap-4">
-        {characterList.map(({ imageUrl, name }) => {
+        {characterList.map(({ imageUrl, name, id }) => {
           return (
-            <Card imageUrl={imageUrl} title={name} className="col-span-2" />
+            <CharacterCard
+              handleRemove={() => handleRemove(id)}
+              characterId={id}
+              imageUrl={imageUrl}
+              title={name}
+              className="col-span-6 sm:col-span-3 md:col-span-2"
+            />
           );
         })}
         {isGetCharactersError && <P>There has been an error</P>}

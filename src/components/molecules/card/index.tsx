@@ -1,13 +1,14 @@
 import { HTMLAttributes } from "react";
 import { P } from "../../atoms/typography";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   subTitle?: string;
   imageUrl: string;
+
 }
 
-function Card({ imageUrl, title, className, ...rest }: Props) {
+function Card({ imageUrl, title, className, ...rest }: CardProps) {
   return (
     <div className={`${className} flex flex-col border rounded`} {...rest}>
       <div className="h-[200px] w-full relative">

@@ -1,10 +1,11 @@
-import { H2 } from "../../components/atoms/typography";
+import { P } from "../../components/atoms/typography";
+import PageTitle from "../../components/molecules/page-title";
 
 function About() {
   return (
     <>
-      <H2>About</H2>
-      <p>Example page</p>
+      <PageTitle text="About" />
+      <P>Example page</P>
     </>
   );
 }
