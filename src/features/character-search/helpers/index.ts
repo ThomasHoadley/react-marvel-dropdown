@@ -1,4 +1,7 @@
-import { CharacterFormatted } from "../../../api/characters/types";
+import {
+  CharacterFormatted,
+  CharactersApiResponse,
+} from "../../../api/characters/types";
 
 export const isCharacterSelected = (
   characterList: CharacterFormatted[],
@@ -20,3 +23,13 @@ export const sortCharactersByName = (
   }
   return 0;
 };
+
+export const formatCharacterData = (characters: CharactersApiResponse) =>
+  characters?.data.results.map((character) => {
+    const data: CharacterFormatted = {
+      id: character.id,
+      name: character.name,
+      imageUrl: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+    };
+    return data;
+  });
