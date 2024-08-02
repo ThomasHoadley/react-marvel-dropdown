@@ -5,11 +5,11 @@ import { P } from "../atoms/typography";
 
 function Header() {
   return (
-    <header className="h-20 flex items-center border-b">
+    <header className="h-20 flex items-center border-b border-white bg-gradient-to-r">
       <PageContainer className="flex justify-between">
         <div className="flex flex-row justify-center items-center space-x-2">
           <Link to={Pages.HOME}>
-            <P className="font-bold text-2xl md:text-3xl text-red-600">
+            <P className="font-bold text-2xl md:text-3xl">
               Super Hero Selection
             </P>
           </Link>

@@ -9,7 +9,10 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 function Card({ imageUrl, title, className, ...rest }: CardProps) {
   return (
-    <div className={`${className} flex flex-col border rounded`} {...rest}>
+    <div
+      className={`${className} flex flex-col border rounded bg-white`}
+      {...rest}
+    >
       <div className="h-[200px] w-full relative">
         <img
           src={imageUrl}

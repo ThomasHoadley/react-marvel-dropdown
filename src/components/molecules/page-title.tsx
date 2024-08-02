@@ -5,7 +5,7 @@ type Props = {
 };
 
 function PageTitle({ text }: Props) {
-  return <H1 className="text-center mb-4 text-red-600">{text}</H1>;
+  return <H1 className="text-center mb-4">{text}</H1>;
 }
 
 export default PageTitle;

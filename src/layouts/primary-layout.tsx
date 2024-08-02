@@ -6,7 +6,7 @@ function PrimaryLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <PageContainer className="pt-8">
+      <PageContainer className="pt-8 h-screen">
         <main>{children}</main>
       </PageContainer>
     </>
