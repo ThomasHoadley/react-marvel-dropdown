@@ -54,3 +54,4 @@ Below is a list of my assumptions about the brief I made while working on this p
 - I don't think the dropdown needs a close icon as clicking away to close it is intuitive enough.
 - I did not add any memoization to the components or functions as the components were already fast enough. I believe memoization should be added retroactively when speed becomes an issue. Also, memoization will not be needed soon with the incoming react compiler.
 - I considered responsive behaviour by using a single column on mobile and 3 columns on desktop.
+- I have made some attempt at accessibility, in that you can tab through the components, but I would like to include ARIA labels and key controls to the search-box.
