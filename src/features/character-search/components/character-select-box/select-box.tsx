@@ -51,7 +51,6 @@ function SelectBox({
   return (
     <div className="relative w-[400px] max-w-full mx-auto z-20">
       <SearchInput
-        id="character-search-input"
         value={characterInput}
         onChange={(e) => setCharacterInput(e.target.value)}
         onFocus={() => {
@@ -72,6 +71,7 @@ function SelectBox({
         <div
           className="flex flex-col border rounded absolute top-0 mt-[42px] w-full bg-white max-h-[206px] overflow-auto"
           ref={selectBoxRef}
+          data-testid="character-dropdown"
         >
           {/* note: I did not think this sort function qualified memoization as it is quick enough */}
           {formattedCharacterData

@@ -46,4 +46,20 @@ describe("SelectBox component", () => {
       screen.getByText("Spider-Woman (Charlotte Witter)")
     ).toBeInTheDocument();
   });
+
+  // on entering sp into the checkbox it should call the following endpoint...
+  it("on entering sp into input field it should call the getCharacters function", async () => {
+    render(
+      <SelectBox
+        displaySelectBox={true}
+        setDisplaySelectBox={setDisplaySelectBox}
+        characterInput="Sp"
+        setCharacterInput={setCharacterInput}
+        characters={mockCharacterApiResponse}
+        isGetCharactersLoading={false}
+        characterList={[]}
+        setCharacterList={setCharacterList}
+      />
+    );
+  });
 });

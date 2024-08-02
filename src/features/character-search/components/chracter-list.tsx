@@ -15,6 +15,8 @@ function CharacterList({ characterList, setCharacterList }: Props) {
     setCharacterList(updatedCharacterList);
   };
 
+  if (characterList.length === 0) return null;
+
   return (
     <div className="grid grid-cols-6 gap-4">
       {characterList.map(({ imageUrl, name, id }) => {

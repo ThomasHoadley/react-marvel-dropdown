@@ -25,6 +25,7 @@ function SearchInput({
         className={cn("border pr-4", loading && "pr-10")}
         placeholder={placeholder}
         onFocus={onFocus}
+        data-testid="character-input"
       />
       <div className="absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none">
         {!loading && <Search />}
