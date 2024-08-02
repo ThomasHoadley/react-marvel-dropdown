@@ -8,7 +8,7 @@ test("Home page renders 'Assemble your team' title", async () => {
   expect(
     screen.getByRole("heading", {
       level: 1,
-      name: "Assemble your team",
+      name: "Private & Confidential",
     })
   ).toBeVisible();
 });

@@ -5,6 +5,7 @@ import { P } from "../../components/atoms/typography";
 import PageTitle from "../../components/molecules/page-title";
 import SelectBox from "./components/character-select-box/select-box";
 import CharacterList from "./components/chracter-list";
+import MissionIntro from "./components/mission-intro";
 import useGetCharacters from "./hooks/useGetCharacters";
 
 function CharacterSearch() {
@@ -17,14 +18,12 @@ function CharacterSearch() {
     isError: isGetCharactersError,
   } = useGetCharacters({ characterInput });
   const [missionAccepted, setMissionAccepted] = useState(false);
+  const handleDeploy = () => {
+    alert(
+      "Operation Save The World is in progress. Thank you for your services."
+    );
+  };
 
-  /**
-   * todo
-   * write api checking tests
-   * improve the error and loading state
-   * improve UI UX experience - i.e. some on brand user loading states etc.
-   * consider scenario if user only enters 1 character
-   */
   return (
     <div className="space-y-6">
       {missionAccepted ? (
@@ -53,11 +52,7 @@ function CharacterSearch() {
           <div className="text-center text-xl">
             <Button
               disabled={characterList.length === 0}
-              onClick={() =>
-                alert(
-                  "Operation Save The World is in progress. Thank you for your services."
-                )
-              }
+              onClick={handleDeploy}
             >
               Deploy
             </Button>
@@ -65,14 +60,7 @@ function CharacterSearch() {
           </div>
         </>
       ) : (
-        <div className="text-xl text-center w-[400px] mx-auto space-y-8">
-          <PageTitle text="Private & Confidential" />
-          <P>
-            Your mission, should you choose to accept it, is to select a crack
-            team of super heroes to save the world. Do you accept?
-          </P>
-          <Button onClick={() => setMissionAccepted(true)}>I accept</Button>
-        </div>
+        <MissionIntro setMissionAccepted={setMissionAccepted} />
       )}
     </div>
   );

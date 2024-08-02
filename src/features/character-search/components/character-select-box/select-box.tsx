@@ -73,11 +73,9 @@ function SelectBox({
           ref={selectBoxRef}
           data-testid="character-dropdown"
         >
-          {/* note: I did not think this sort function qualified memoization as it is quick enough */}
           {formattedCharacterData
             ?.sort(sortCharactersByName)
             .map((character) => {
-              // todo make the button component reusable
               return (
                 <button
                   className={`border-b py-2 px-2 cursor-pointer hover:bg-slate-100 text-left last:border-0 ${
@@ -85,7 +83,6 @@ function SelectBox({
                       ? "bg-gray-100 !cursor-not-allowed"
                       : ""
                   }`}
-                  // todo - handle enter key press
                   onClick={() => handleSelect(character)}
                   key={character.id}
                 >

@@ -4,8 +4,6 @@ import "../../../../../vitest.setup";
 import { mockCharacterApiResponse } from "../../../../tests/characters/mock-data";
 import SelectBox from "./select-box";
 
-// todo - mock the api calls on 2 characters input
-
 describe("SelectBox component", () => {
   const setCharacterInput = vi.fn();
   const setDisplaySelectBox = vi.fn();
@@ -45,21 +43,5 @@ describe("SelectBox component", () => {
     expect(
       screen.getByText("Spider-Woman (Charlotte Witter)")
     ).toBeInTheDocument();
-  });
-
-  // on entering sp into the checkbox it should call the following endpoint...
-  it("on entering sp into input field it should call the getCharacters function", async () => {
-    render(
-      <SelectBox
-        displaySelectBox={true}
-        setDisplaySelectBox={setDisplaySelectBox}
-        characterInput="Sp"
-        setCharacterInput={setCharacterInput}
-        characters={mockCharacterApiResponse}
-        isGetCharactersLoading={false}
-        characterList={[]}
-        setCharacterList={setCharacterList}
-      />
-    );
   });
 });

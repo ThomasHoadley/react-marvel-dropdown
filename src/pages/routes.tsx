@@ -16,7 +16,7 @@ export const router = createBrowserRouter(
           <Outlet />
         </PrimaryLayout>
       }
-      errorElement={<p>TODO Add a 404 error page.</p>}
+      errorElement={<p>404 error page.</p>}
     >
       <Route index path="/" element={<SearchPage />} />
       <Route path="/about" element={<About />} />
