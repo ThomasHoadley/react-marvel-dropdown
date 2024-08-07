@@ -10,7 +10,7 @@ function Button({ onClick, children, disabled }: Props) {
   return (
     <button
       className={cn(
-        "px-4 py-2 bg-red-800 rounded hover:bg-red-500 transition-colors",
+        "px-4 py-2 bg-red-800 rounded hover:bg-red-500 transition-colors text-white",
         disabled && "cursor-not-allowed opacity-50"
       )}
       onClick={(e) => {

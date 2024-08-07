@@ -7,3 +7,4 @@ export function getCharacters(args: CharacterQueryArgs) {
     // orderBy: "name",
   });
 }
+

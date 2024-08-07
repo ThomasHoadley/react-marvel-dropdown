@@ -3,6 +3,10 @@ import { CharacterFormatted } from "../../api/characters/types";
 import Button from "../../components/atoms/button";
 import { P } from "../../components/atoms/typography";
 import PageTitle from "../../components/molecules/page-title";
+import CharacterFilter, {
+  SortFiterLabel,
+  SortFiterValue,
+} from "./components/character-filter";
 import SelectBox from "./components/character-select-box/select-box";
 import CharacterList from "./components/chracter-list";
 import MissionIntro from "./components/mission-intro";
@@ -12,6 +16,9 @@ function CharacterSearch() {
   const [characterInput, setCharacterInput] = useState<string>("");
   const [displaySelectBox, setDisplaySelectBox] = useState(false);
   const [characterList, setCharacterList] = useState<CharacterFormatted[]>([]);
+  const defaultSortState = SortFiterValue.Default;
+  const [sortValue, setSortValue] = useState(defaultSortState);
+
   const {
     data: characters,
     isLoading: isGetCharactersLoading,
@@ -35,6 +42,7 @@ function CharacterSearch() {
               <P>When you are ready, deploy your team.</P>
             </div>
           )}
+
           <SelectBox
             displaySelectBox={displaySelectBox}
             setDisplaySelectBox={setDisplaySelectBox}
@@ -45,9 +53,27 @@ function CharacterSearch() {
             characterList={characterList}
             setCharacterList={setCharacterList}
           />
+          <CharacterFilter
+            sortState={{ sortValue: sortValue, setSortValue }}
+            sortValues={[
+              {
+                label: SortFiterLabel.Default,
+                value: SortFiterValue.Default,
+              },
+              {
+                label: SortFiterLabel.Alphabetical,
+                value: SortFiterValue.Alphabetical,
+              },
+              {
+                label: SortFiterLabel.ReverseAlphabetical,
+                value: SortFiterValue.ReverseAlphabetical,
+              },
+            ]}
+          />
           <CharacterList
             characterList={characterList}
             setCharacterList={setCharacterList}
+            sortValue={sortValue}
           />
           <div className="text-center text-xl">
             <Button
